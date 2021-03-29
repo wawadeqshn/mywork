@@ -1,0 +1,18 @@
+server:
+  port: 5000
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  kafka:
+    #    consumer:
+    #      auto-offset-reset: latest
+    #      group-id: opensdkProcesser
+    #      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    #      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    #    producer:
+    #      key-serializer: org.apache.kafka.common.serialization.StringDeserializer
+    #      value-serializer: org.apache.kafka.common.serialization.StringDeserializer
+    group-id: loggergroup
+    topic: logtopic
+    bootstrap-servers: 192.168.137.129:9092
