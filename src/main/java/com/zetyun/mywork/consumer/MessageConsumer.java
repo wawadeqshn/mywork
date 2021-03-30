@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MessageConsumer {
 
+
+
     @KafkaListener(topics = "${spring.kafka.topic}",containerFactory = "kafkaListenerContainerFactory")
     public void listen(String message) {
         System.out.println("接收到："+message);

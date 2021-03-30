@@ -2,6 +2,7 @@ package com.zetyun.mywork.service;
 
 import com.zetyun.mywork.domain.LogInfo;
 import com.zetyun.mywork.domain.LogInfoTemp;
+import org.elasticsearch.action.bulk.BulkResponse;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ import java.util.List;
 public interface LoggerService {
 
     List<LogInfoTemp> findAll();
+
+    BulkResponse save(String indexName, List<LogInfo> bulks);
 }

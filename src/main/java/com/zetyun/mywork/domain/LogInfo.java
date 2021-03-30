@@ -9,6 +9,7 @@ import lombok.Data;
  **/
 @Data
 public class LogInfo {
+    private String id; // 业务ID
     private String thread; // 线程
     private String methodNamePath; // 调用接口的类完整路径
     private String methodType; // 接口中调用的方法

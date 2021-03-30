@@ -27,9 +27,6 @@ public class KafkaController {
     @Autowired
     private KafkaService kafkaService;
 
-    @Autowired
-    private LoggerService loggerService;
-
     /*@GetMapping(value = "/send")
     public Result monitorTypeList(HttpServletRequest request) {
         try {
@@ -52,16 +49,4 @@ public class KafkaController {
             return Result.failure(ResultCode.SENSEDEAL_QUESTIONED);
         }
     }
-
-    @GetMapping(value = "/find")
-    public Result find(){
-        try {
-            List<LogInfoTemp> result = loggerService.findAll();
-            return Result.success(result);
-        } catch (Exception e) {
-            log.error("系统错误",e);
-            return Result.failure(ResultCode.SENSEDEAL_QUESTIONED);
-        }
-    }
-
 }
