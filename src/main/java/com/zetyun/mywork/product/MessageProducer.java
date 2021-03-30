@@ -49,15 +49,14 @@ public class MessageProducer {
                     //System.out.println("发送kafka信息失败，失败信息：" + throwable.getMessage());
                     //log.error(ReturnJsonFormatUntil.jsonStrings(false,"发送kafka日志信息失败，失败信息：" + ex.getMessage(),msg));
                     //发送失败的处理
-                    log.info(kafkaConfigProperties.getTopic() + " ======== 生产者 发送消息失败========：" + ex.getMessage());
+                    log.info(kafkaConfigProperties.getTopic() + " ======== 【生产者】 发送消息【失败】========：" + ex.getMessage());
                 }
 
                 @Override
                 public void onSuccess(SendResult<String, Object> result) {
                     // log.info(ReturnJsonFormatUntil.jsonStrings(true,"发送kafka信息成功！！！", obj));
-                    log.info(kafkaConfigProperties.getTopic() + " ======== 生产者 发送消息成功======== " + result.toString());
-                    System.out.println("发送消息成功：" + result.getRecordMetadata().topic() + "-"
-                            + result.getRecordMetadata().partition() + "-" + result.getRecordMetadata().offset());
+                    log.info(kafkaConfigProperties.getTopic() + " ======== 【生产者】 发送消息【成功】======== " + result.toString());
+                    // System.out.println("发送消息成功：" + result.getRecordMetadata().topic() + "-" + result.getRecordMetadata().partition() + "-" + result.getRecordMetadata().offset());
                 }
             });
         }
