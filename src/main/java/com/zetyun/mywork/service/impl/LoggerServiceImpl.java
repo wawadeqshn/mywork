@@ -92,10 +92,10 @@ public class LoggerServiceImpl implements LoggerService {
             IndexRequest request = new IndexRequest(REQUEST_TYPE);
             request.index(indexName).type(INDEX_TYPE).id(String.valueOf(bulk.getId())).source(JSON.parseObject(JSON.toJSONString(bulk)), XContentType.JSON);
             IndexResponse response = highLevelClientPre.index(request, RequestOptions.DEFAULT);
-            log.info("======【新增】数据 ~ 成功======");
+            log.info("【新增】======【ElasticSearch 】 ~ 成功======");
             return response;
         }catch (Exception e){
-            log.error("新增数据失败:{}", e);
+            log.error("【新增】======【ElasticSearch 】 - 失败:{}", e);
         }
         return null;
     }

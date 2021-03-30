@@ -18,14 +18,15 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MessageConsumer {
 
+    private static final String INDEX_NAME ="logindex";
+
     @Autowired
     private LoggerService loggerService;
 
     @KafkaListener(topics = "${spring.kafka.topic}",containerFactory = "kafkaListenerContainerFactory")
     public void listen(String message) {
-        System.out.println("接收到："+message);
+        System.out.println("【消费者】接收到消息=============> "+ message);
         LogInfo info = JSON.parseObject(message, LogInfo.class);
-        System.out.println("=========66=============> "+info.getMethodType());
-        loggerService.save("",info);
+        loggerService.save(INDEX_NAME,info);
     }
 }
