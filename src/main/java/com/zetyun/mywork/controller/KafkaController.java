@@ -70,15 +70,9 @@ public class KafkaController {
                 LogInfo logInfo = LogInfo.builder().id(String.valueOf(atomicInteger.getAndIncrement()))
                         .thread("thread-logThread-"+atomicInteger.getAndIncrement())
                         .methodNamePath(methodNamePathArray[methodPathNum])
-                        .methodType(methodTypeArray[methodTypeNum])
-                        .startTime(100)
-                        .endTime(200)
-                        .time(100)
-                        .status("success")
-                        .level(levelArray[levelNum])
-                        .build();
+                        .methodType(methodTypeArray[methodTypeNum]).startTime(100).endTime(200).time(100)
+                        .status("success").level(levelArray[levelNum]).build();
                 String message = JsonTools.createJsonString(logInfo);
-                //System.out.println("---->"+message);
                 kafkaService.sendMessage(message);
             }
             return Result.success();

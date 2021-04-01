@@ -38,6 +38,17 @@ public class SearchController {
         }
     }
 
+    @GetMapping(value = "/get/type")
+    public Result findByType(@RequestParam String type){
+        try {
+            List<LogInfo> result = loggerService.findByType(type);
+            return Result.success(result);
+        } catch (Exception e) {
+            log.error("系统错误",e);
+            return Result.failure(ResultCode.SENSEDEAL_QUESTIONED);
+        }
+    }
+
     @PostMapping(value = "/save")
     public Result save(@RequestBody String message){
         try {

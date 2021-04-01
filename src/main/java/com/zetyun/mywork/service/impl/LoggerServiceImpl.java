@@ -136,12 +136,11 @@ public class LoggerServiceImpl implements LoggerService {
     public List<CommonInfo> groupByLevel() {
         List<CommonInfo> result = new ArrayList<>();
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.size(0); // 每页10条数据
+        searchSourceBuilder.size(0); // 聚合的时候不获取数据
         TermsAggregationBuilder aggBuilders = AggregationBuilders.terms(GROUP_NAME).field(GROUP_TYPE).size(200);
         searchSourceBuilder.aggregation(aggBuilders);
         SearchRequest searchRequest = new SearchRequest(INDEX_NAME);
         searchRequest.source(searchSourceBuilder);
-
         SearchResponse searchResponse = null;
         try {
             searchResponse = highLevelClientPre.search(searchRequest, RequestOptions.DEFAULT);
@@ -156,6 +155,37 @@ public class LoggerServiceImpl implements LoggerService {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * @description: 通过日志级别类型查找日志,后续可进行分页
+     * @param type
+     * @author: dingxy
+     * @date: 2021/4/1 13:26
+     */
+    @Override
+    public List<LogInfo> findByType(String type) {
+        List<LogInfo> result = new ArrayList<>();
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        TermQueryBuilder sentimentQueryBuilder = QueryBuilders.termQuery("level", type);
+        boolQueryBuilder.must(sentimentQueryBuilder);
+        searchSourceBuilder.query(boolQueryBuilder);
+        searchSourceBuilder.size(10); // 每页10条数据
+        SearchRequest searchRequest = new SearchRequest(INDEX_NAME);  // 要查找的索引名称
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = null;
+        try {
+            searchResponse = highLevelClientPre.search(searchRequest, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for (SearchHit hit : searchResponse.getHits()) {
+            String content = hit.getSourceAsString();
+            LogInfo info = JSON.parseObject(content, LogInfo.class);
+            result.add(info);
         }
         return result;
     }

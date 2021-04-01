@@ -42,4 +42,12 @@ public interface LoggerService {
      * @date: 2021/3/30 16:24
      */
     List<CommonInfo> groupByLevel();
+
+    /**
+     * @description: 通过类型查找
+     * @param type
+     * @author: dingxy
+     * @date: 2021/4/1 13:26
+     */
+    List<LogInfo> findByType(String type);
 }

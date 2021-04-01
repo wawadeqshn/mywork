@@ -37,7 +37,7 @@ public class MessageConsumer {
         loggerService.save(INDEX_NAME,info);
     }*/
 
-    // 批量消费 , concurrency = "2"
+    // 批量消费
     @KafkaListener(topics = "${spring.kafka.topic}",containerFactory = "kafkaListenerContainerFactory", errorHandler = "dealError")
     public void batchListen(List<ConsumerRecord<?, ?>> records, Acknowledgment ack) {
         Set<String> messageSet = (Set) records.stream().map(ConsumerRecord::value).collect(Collectors.toSet());
@@ -45,6 +45,6 @@ public class MessageConsumer {
         List<LogInfo> result = JSONArray.parseArray(messageSet.toString(), LogInfo.class);
         System.out.println("【转换后的数据】=============> "+ result);
         loggerService.batchSave(INDEX_NAME,result);
-        //ack.acknowledge();
+        ack.acknowledge();
     }
 }
