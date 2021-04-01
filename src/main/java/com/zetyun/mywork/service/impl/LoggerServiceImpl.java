@@ -110,13 +110,12 @@ public class LoggerServiceImpl implements LoggerService {
      */
     @Override
     public BulkResponse batchSave(String indexName, List<LogInfo> bulks) {
-
         try{
             BulkRequest bulkRequest = new BulkRequest();
             IndexRequest request = null;
             for(LogInfo bulk: bulks) {
                 request = new IndexRequest(REQUEST_TYPE);
-                request.index(indexName).id(String.valueOf(bulk.getId())).source(bulk.toString(), XContentType.JSON);
+                request.index(indexName).type(INDEX_TYPE).id(String.valueOf(bulk.getId())).source(JSON.parseObject(JSON.toJSONString(bulk)), XContentType.JSON);
                 bulkRequest.add(request);
             }
             BulkResponse response = highLevelClientPre.bulk(bulkRequest, RequestOptions.DEFAULT);

@@ -1,6 +1,9 @@
 package com.zetyun.mywork.domain;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Tolerate;
 
 /**
  * @description: 日志信息
@@ -8,6 +11,7 @@ import lombok.Data;
  * @create: 2021-03-29 17:35:20
  **/
 @Data
+@Builder
 public class LogInfo {
     private String id; // 业务ID
     private String thread; // 线程
@@ -18,4 +22,7 @@ public class LogInfo {
     private long time; // 耗时
     private String status; // 状态
     private String level; // 级别 INFO
+
+    @Tolerate
+    LogInfo() {};
 }

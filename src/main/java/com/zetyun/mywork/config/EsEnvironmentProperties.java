@@ -1,8 +1,6 @@
 package com.zetyun.mywork.config;
 
 import org.apache.http.HttpHost;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.elasticsearch.client.RestClient;
@@ -28,12 +26,6 @@ public class EsEnvironmentProperties {
 
     @Value("${es.protocol}")
     private String protocol; //协议
-
-    /*@Value("${es.username}")
-    private String username;*/ //用户名
-
-    /*@Value("${es.password}")
-    private String password;*/ //密码
 
     @Bean(name = "highLevelClientPre")
     public RestHighLevelClient getRestHighLevelClientPre() {
