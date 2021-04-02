@@ -17,7 +17,7 @@ spring:
     topic: logtopic
     bootstrap-servers: 192.168.137.129:9092
 
-#舆情及动产抵押ES查询配置
+#es相关设置
 es:
   eshost: 192.168.137.129
   port: 9200
